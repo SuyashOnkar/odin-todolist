@@ -1,2 +1,2 @@
 # odin-todolist
-# This is a project under TheOdinProject
+This is a project under TheOdinProject
