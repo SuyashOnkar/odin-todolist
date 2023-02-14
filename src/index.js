@@ -1,6 +1,6 @@
 import './style.css';
 import './reset.css';
-import { tasks, projects } from './logic.js';
+import { tasks, projects, project_list } from './logic.js';
 
 console.log('hello randi');
 
@@ -50,7 +50,16 @@ console.log('hello randi');
     //Change task list when clicking on a project
     const actualProjects = document.querySelectorAll('.actualProjects');
     actualProjects[actualProjects.length - 1].addEventListener('click', (e) => {
-      console.log(e.target);
+      console.log(e.target.innerText);
+      console.log(project_list);
+      for (let i of project_list) {
+        if (i.getName == e.target.innerText) {
+          console.log(i);
+          generateTasksandAddtoDom(i);
+          selectedProject = i;
+        }
+      }
+      //
     });
   }
 
@@ -93,6 +102,7 @@ console.log('hello randi');
   //   default_project.addTasks(task2);
 
   console.log(default_project.getTaskList);
+
   function generateTasksandAddtoDom(project) {
     taskDisplayDiv.replaceChildren();
     project.getTaskList.forEach((p) => {
@@ -115,27 +125,28 @@ console.log('hello randi');
     '<form id="submitForm"><input class="textBox" required></input><input type="submit"></input></form>';
   tasksDiv.appendChild(taskInputDiv);
 
+  let selectedProject = default_project;
+
   const submitForm = document.getElementById('submitForm');
   submitForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const taskTitle = document.querySelector('.textBox').value;
     const newTask = new tasks(taskTitle);
-    default_project.addTasks(newTask);
-    generateTasksandAddtoDom(default_project);
-    console.log(default_project.getTaskList);
+    selectedProject.addTasks(newTask);
+    generateTasksandAddtoDom(selectedProject);
     submitForm.reset();
   });
 })();
 
-const d = new Date('2023-02-12');
-const task1 = new tasks('hello', 'this is a task', d, 'high');
-const task2 = new tasks('hello1', 'description', d, 'low');
+// const d = new Date('2023-02-12');
+// const task1 = new tasks('hello', 'this is a task', d, 'high');
+// const task2 = new tasks('hello1', 'description', d, 'low');
 
-console.log(task1.getDueDate);
+// console.log(task1.getDueDate);
 
-const project1 = new projects('project1');
+// const project1 = new projects('project1');
 
-project1.addTasks(task1);
-project1.addTasks(task2);
+// project1.addTasks(task1);
+// project1.addTasks(task2);
 
-console.log(project1.getTaskList);
+// console.log(project1.getTaskList);

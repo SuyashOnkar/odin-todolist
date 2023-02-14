@@ -20,9 +20,12 @@ export class tasks {
   }
 }
 
+export const project_list = [];
+
 export class projects {
   constructor(name) {
     this.name = name;
+    project_list.push(this);
   }
 
   get getName() {
