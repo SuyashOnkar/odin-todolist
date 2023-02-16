@@ -14,14 +14,20 @@
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.7.3",
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
     "html-loader": "^4.2.0",
-    "html-webpack-plugin": "^4.5.0",
+    "sass": "^1.58.1",
+    "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
-    "webpack": "^5.4.0",
+    "webpack": "^5.75.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "pretty-checkbox": "^3.0.3"
   }
 }

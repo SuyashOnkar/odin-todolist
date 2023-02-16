@@ -1,9 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Development</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"></head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css"
+    />
+  </head>
   <body>
-  <script src="runtime.bundle.js"></script><script src="index.bundle.js"></script></body>
+    <script src="index.bundle.js"></script>
+    <script src="runtime.bundle.js"></script>
+    <div class="container">
+      <div class="title">
+        <h1>todo-app</h1>
+      </div>
+      <div class="todoApp">
+        <div class="projectColumn">
+          <div class="projectTitle">
+            <h2>PROJECTS</h2>
+            <h2 id="addProjectButton">+</h2>
+          </div>
+          <div class="projectList">
+            <div class="project">Example Project</div>
+            <div class="project">Example Project</div>
+          </div>
+        </div>
+        <div class="taskColumn">
+          <div class="taskTitle">
+            <h2>TASKS</h2>
+            <h2 id="addTaskButton">+</h2>
+          </div>
+          <div class="taskContainer">
+            <div class="taskList">
+              <div class="task">
+                <div class="checkbox">
+                  <div class="pretty p-svg p-plain p-bigger">
+                    <input type="checkbox" />
+                    <div class="state">
+                      <img class="svg" src="./img/checkmark.svg" />
+                      <label></label>
+                    </div>
+                  </div>
+                </div>
+                <p>Example Project</p>
+              </div>
+              <div class="task">
+                <div class="checkbox">
+                  <div class="pretty p-svg p-plain p-bigger">
+                    <input type="checkbox" />
+                    <div class="state">
+                      <img class="svg" src="./img/checkmark.svg" />
+                      <label></label>
+                    </div>
+                  </div>
+                </div>
+                <p>Example Project</p>
+              </div>
+            </div>
+            <div class="taskDetails">
+              <h2>Example Project</h2>
+              <span>Due Date: 16th Feb</span>
+              <p>these are the details of the task</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,111 +1,92 @@
-body,
-input {
-  background-color: rgba(0, 0, 0, 0.927);
-  color: white;
+body {
   font-family: monospace;
+  background-color: black;
+  color: white;
 }
 
-input[type=submit],
-.projects {
-  cursor: pointer;
+.container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
 }
 
-.title {
-  text-align: center;
+.todoApp {
+  border: 1px solid black;
+  width: 700px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: 25% 75%;
 }
-
-.hero {
-  border: 1px solid white;
-  width: 100%;
-  height: 600px;
+.todoApp .projectColumn {
+  border: 1px solid lightblue;
+  height: 100%;
+}
+.todoApp .projectColumn .projectTitle {
+  justify-content: center;
+  padding: 5px;
+  border-bottom: 1px solid orange;
   display: flex;
+  gap: 10px;
 }
-.hero > * {
-  border: 0.5px solid white;
-  flex: auto;
-}
-.hero .sidebar {
-  width: max(25%, 200px);
-}
-.hero .sidebar .sidebarTitle {
-  text-align: center;
-  height: 50px;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column-reverse;
-  font-size: 1.5rem;
-  border-bottom: 1px solid white;
-}
-.hero .sidebar .sidebarProjectsDiv {
+.todoApp .projectColumn .projectList {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  padding: 10px 0px;
+  gap: 15px;
+}
+.todoApp .projectColumn .projectList .project {
+  width: 100%;
+  padding: 5px 5px;
+}
+.todoApp .projectColumn .projectList .project:hover {
+  border: 1px solid white;
+  cursor: pointer;
+}
+.todoApp .taskColumn {
+  border: 1px solid red;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 10% 90%;
+}
+.todoApp .taskColumn .taskTitle {
+  justify-content: center;
+  padding: 5px;
+  border-bottom: 1px solid orange;
+  display: flex;
+  gap: 10px;
+}
+.todoApp .taskColumn .taskContainer {
+  height: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+.todoApp .taskColumn .taskContainer .taskList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  font-size: 1rem;
   gap: 5px;
 }
-.hero .sidebar .sidebarProjectsDiv .projects {
-  width: 100%;
-  text-align: center;
-  font-size: 1.2rem;
-  padding: 10px;
-}
-.hero .sidebar .sidebarProjectsDiv .projects:hover {
-  background-color: white;
-  color: black;
-}
-.hero .sidebar .addButton {
-  cursor: pointer;
-}
-.hero .tasksDiv {
-  width: 75%;
-}
-
-#projectInputDiv {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 30px;
-  width: 300px;
-  height: 150px;
-  border-radius: 10px;
-  background-color: rgb(255, 229, 180);
-  color: black;
-}
-#projectInputDiv p {
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
-.tasksDiv {
+.todoApp .taskColumn .taskContainer .taskList .task {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  gap: 10px;
 }
-
-.taskDisplayDiv > * {
-  width: 100%;
-  border: 1px solid white;
-  font-size: 1.3rem;
+.todoApp .taskColumn .taskContainer .taskList .task .checkbox {
+  width: 25px;
+}
+.todoApp .taskColumn .taskContainer .taskDetails {
+  border: 1px solid greenyellow;
   padding: 5px 15px;
+  text-align: center;
 }
-
-.taskInputDiv form {
-  display: flex;
-  border: 1px solid white;
-  height: 50px;
-}
-.taskInputDiv form .textBox {
-  background: none;
-  height: 100%;
-  width: 70%;
-  font-size: 1.1rem;
-}
-.taskInputDiv form input[type=submit] {
-  background: none;
-  width: 30%;
-}
-.taskInputDiv form input[type=submit]:hover {
-  background-color: white;
-  color: black;
+.todoApp .taskColumn .taskContainer .taskDetails span {
+  color: red;
 }
 
 /*# sourceMappingURL=style.css.map */

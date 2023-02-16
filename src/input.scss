@@ -1,134 +1,112 @@
-$font-color: white;
-$background-color: rgba(0, 0, 0, 0.927);
-$alt-background-color: white;
-$alt-font-color: black;
+@mixin light {
+  background-color: white;
+  color: black;
+}
 
-$peach: rgb(255, 229, 180);
+@mixin dark {
+  background-color: black;
+  color: white;
+}
 
-body,
-input {
-  background-color: $background-color;
-  color: $font-color;
+body {
   font-family: monospace;
+  @include dark();
 }
 
-input[type='submit'],
-.projects {
-  cursor: pointer;
+.container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
 }
 
-.title {
-  text-align: center;
-}
+.todoApp {
+  border: 1px solid black;
+  width: 700px;
+  height: 400px;
 
-.hero {
-  border: 1px solid white;
-  width: 100%;
-  height: 600px;
+  display: grid;
+  grid-template-columns: 25% 75%;
 
-  display: flex;
+  .projectColumn {
+    border: 1px solid lightblue;
+    height: 100%;
 
-  > * {
-    border: 0.5px solid white;
-    flex: auto;
-  }
-
-  .sidebar {
-    width: max(25%, 200px);
-
-    .sidebarTitle {
-      text-align: center;
-      height: 50px;
-      font-weight: bold;
+    .projectTitle {
+      justify-content: center;
+      padding: 5px;
+      border-bottom: 1px solid orange;
       display: flex;
-      flex-direction: column-reverse;
-      font-size: 1.5rem;
-      border-bottom: 1px solid white;
+      gap: 10px;
     }
 
-    .sidebarProjectsDiv {
+    .projectList {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      align-items: center;
+      text-align: center;
+      font-size: 1rem;
+      padding: 10px 0px;
+      gap: 15px;
 
-      .projects {
+      .project {
         width: 100%;
-        text-align: center;
-        font-size: 1.2rem;
-        padding: 10px;
-        // background-color: green;
+        padding: 5px 5px;
       }
-
-      .projects:hover {
-        background-color: $alt-background-color;
-        color: $alt-font-color;
+      .project:hover {
+        border: 1px solid white;
+        cursor: pointer;
       }
     }
-
-    .addButton {
-      cursor: pointer;
-    }
   }
 
-  .tasksDiv {
-    width: 75%;
-  }
-}
-
-#projectInputDiv {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  padding: 30px;
-
-  width: 300px;
-  height: 150px;
-  border-radius: 10px;
-
-  background-color: $peach;
-  color: $alt-font-color;
-
-  p {
-    font-weight: bold;
-    font-size: 1.3rem;
-  }
-}
-
-.tasksDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.taskDisplayDiv > * {
-  width: 100%;
-  border: 1px solid white;
-  font-size: 1.3rem;
-  padding: 5px 15px;
-}
-
-.taskInputDiv form {
-  display: flex;
-
-  border: 1px solid white;
-  height: 50px;
-
-  .textBox {
-    background: none;
+  .taskColumn {
+    border: 1px solid red;
     height: 100%;
-    width: 70%;
-    font-size: 1.1rem;
-  }
+    display: grid;
+    grid-template-rows: 10% 90%;
 
-  input[type='submit'] {
-    background: none;
-    width: 30%;
-  }
+    .taskTitle {
+      justify-content: center;
+      padding: 5px;
+      border-bottom: 1px solid orange;
+      display: flex;
+      gap: 10px;
+    }
 
-  input[type='submit']:hover {
-    background-color: $alt-background-color;
-    color: $alt-font-color;
+    .taskContainer {
+      height: 100%;
+      overflow: auto;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+
+      .taskList {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 10px;
+        font-size: 1rem;
+        gap: 5px;
+
+        .task {
+          display: flex;
+          gap: 10px;
+
+          .checkbox {
+            width: 25px;
+          }
+        }
+      }
+
+      .taskDetails {
+        border: 1px solid greenyellow;
+        padding: 5px 15px;
+
+        text-align: center;
+        span {
+          color: red;
+        }
+      }
+    }
   }
 }
