@@ -59,14 +59,14 @@ export function createAddProjectForm() {
 }
 
 export function removeAddTaskForm() {
-  const projectList = getElem('.taskList');
-  projectList.removeChild(document.querySelector('.newTaskForm'));
+  const taskColumn = getElem('.taskColumn');
+  taskColumn.removeChild(document.querySelector('.newTaskForm'));
 }
 
 export function createAddTaskForm() {
   const newTaskTemplate = document.querySelector('#newTaskTemplate');
   const clone = newTaskTemplate.content.cloneNode(true);
 
-  const taskList = getElem('.taskList');
-  taskList.append(clone);
+  const taskColumn = getElem('.taskColumn');
+  taskColumn.append(clone);
 }

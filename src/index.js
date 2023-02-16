@@ -18,6 +18,7 @@ import {
   generateTasks,
   getElem,
   removeAddProjectForm,
+  removeAddTaskForm,
 } from './domOps';
 
 // const task1 = new Task();
@@ -67,10 +68,43 @@ const addProjectEvent = () => {
     }
   });
 };
-
 // I cant figure a way to run this other than this.
-
 addProjectEvent();
+// ************************** //
+
+// const submitTaskNameEvent = () => {
+//   const addTaskForm = getElem('.newProjectForm');
+//   addProjectForm.addEventListener('submit', (e) => {
+//     const projectName = getElem('#newProjectName').value;
+//     // I need to group these functions together
+//     const project = new Project(projectName);
+//     project.addToProjectList();
+//     addProjectToDom(projectName);
+//     // ^^
+//     projectSelectEvent();
+//     removeAddProjectForm();
+//     e.preventDefault();
+//   });
+// };
+
+const addTaskEvent = () => {
+  const addTaskButton = getElem('#addTaskButton');
+  addTaskButton.addEventListener('click', () => {
+    const taskColumnDom = getElem('.taskColumn');
+    if (taskColumnDom.querySelector('form')) {
+      removeAddTaskForm();
+    } else {
+      createAddTaskForm();
+      /**
+       * Currently running the submit project Event only when
+       * add Project event is called
+       */
+      submitTaskNameEvent();
+    }
+  });
+};
+
+addTaskEvent();
 
 /**
  * Time for some messy code I think because:
@@ -89,12 +123,14 @@ defaultProject.addToProjectList();
 addProjectToDom(defaultProject.getName);
 
 let selectedProject = defaultProject;
-defaultProject.getTaskList;
 
 const projectSelectEvent = () => {
+  const project = getElem('.projectList').lastChild;
   project.addEventListener('click', (e) => {
     selectedProject = searchProject(e.target.value);
     generateTasks(selectedProject);
     project.classList.add('selected');
   });
 };
+
+projectSelectEvent();

@@ -9,7 +9,8 @@
 }
 
 body,
-input {
+input,
+textarea {
   font-family: monospace;
   @include dark();
 }
@@ -77,6 +78,10 @@ input {
       border-bottom: 1px solid orange;
       display: flex;
       gap: 10px;
+
+      #addTaskButton {
+        cursor: pointer;
+      }
     }
 
     .taskContainer {
@@ -136,24 +141,30 @@ input {
 
   // INPUT FIELD WHEN SELECTED (update it)
 }
+.taskColumn {
+  position: relative;
+}
 
-.newTask {
+.newTaskModal {
+  position: absolute;
+  background-color: rgb(19, 16, 16);
+  width: 250px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 20px;
+  font-size: 1em;
+  border-radius: 15px;
+
   display: flex;
-  width: 100%;
-  justify-content: center;
-  font-size: 0.9em;
-  padding: 0px;
-  input[type='submit'] {
-    display: none;
-    position: absolute;
-  }
-  input[type='text'] {
-    width: 100%;
-    height: 24px;
-    background: none;
-    border: 0;
-    padding: 5px;
-  }
+  flex-direction: column;
+  gap: 10px;
 
-  // INPUT FIELD WHEN SELECTED (update it)
+  input,
+  textarea {
+    background: rgb(49, 42, 42);
+    border: 0;
+  }
 }

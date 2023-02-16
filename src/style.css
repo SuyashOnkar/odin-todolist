@@ -1,5 +1,6 @@
 body,
-input {
+input,
+textarea {
   font-family: monospace;
   background-color: black;
   color: white;
@@ -63,6 +64,9 @@ input {
   display: flex;
   gap: 10px;
 }
+.todoApp .taskColumn .taskTitle #addTaskButton {
+  cursor: pointer;
+}
 .todoApp .taskColumn .taskContainer {
   height: 100%;
   overflow: auto;
@@ -112,23 +116,29 @@ input {
   text-align: center;
 }
 
-.newTask {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  font-size: 0.9em;
-  padding: 0px;
+.taskColumn {
+  position: relative;
 }
-.newTask input[type=submit] {
-  display: none;
+
+.newTaskModal {
   position: absolute;
+  background-color: rgb(19, 16, 16);
+  width: 250px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  font-size: 1em;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.newTask input[type=text] {
-  width: 100%;
-  height: 24px;
-  background: none;
+.newTaskModal input,
+.newTaskModal textarea {
+  background: rgb(49, 42, 42);
   border: 0;
-  padding: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */
