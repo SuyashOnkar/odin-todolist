@@ -1,4 +1,4 @@
-export const projectList = [];
+const projectList = [];
 
 export function searchProject(projectName) {
   return projectList.filter((x) => x.getName === projectName);
@@ -7,6 +7,9 @@ export function searchProject(projectName) {
 export class Project {
   constructor(name) {
     this.name = name;
+  }
+
+  addToProjectList() {
     projectList.push(this);
   }
 
