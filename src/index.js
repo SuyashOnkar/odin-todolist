@@ -1,6 +1,8 @@
 import './reset.css';
 import './style.css';
 
+import { format } from 'date-fns';
+
 import { searchProject, Project } from './projects';
 import Task from './tasks';
 import dom from './domOps';
@@ -41,8 +43,11 @@ function selectProjectForm() {
   latestProject.addEventListener('click', (e) => {
     console.log(selectedProject);
     selectedProject = searchProject(e.target.innerText);
-    console.log(selectedProject);
     generateTasks();
+
+    // Add selected class to the one clicked
+    dom.removeClass();
+    e.target.classList.add('selected');
   });
 }
 
@@ -52,6 +57,8 @@ addTaskButton.addEventListener('click', () => {
     dom.removeAddTaskForm();
   } else {
     dom.createAddTaskForm();
+    const today = new Date();
+    dom.getElem('#dueDate').value = format(today, 'yyyy-MM-dd');
     submitTaskForm();
   }
 });
@@ -63,7 +70,15 @@ function submitTaskForm() {
     const title = dom.getElem('#taskName').value;
     const description = dom.getElem('#taskDescription').value;
     const dueDate = dom.getElem('#dueDate').value;
-    const priority = dom.getElem('.taskPriority').value;
+    let priority = 'none';
+    const priority_radios = dom
+      .getElem('.taskPriority')
+      .querySelectorAll('input[type="radio"]');
+    priority_radios.forEach((e) => {
+      if (e.checked) {
+        priority = e.value;
+      }
+    });
 
     const task = new Task(title, description, dueDate, priority);
     selectedProject.addTask(task);
@@ -79,14 +94,58 @@ function generateTasks() {
   const taskList = selectedProject.getTaskList;
   console.log(taskList);
   taskList.forEach((task) => {
-    dom.addTaskToDom(task.getName);
+    const date = new Date(task.dueDate);
+    const formattedDate = format(date, 'cccc do');
+    dom.addTaskToDom(task.getName, formattedDate);
+    selectTaskEvent();
+    taskCompleteEvent();
+  });
+}
+
+// Event when we click a task -> generate task details
+function selectTaskEvent() {
+  // adding event listener to last task everytime a new task is created
+  const lastTask = dom.getElem('.taskList').lastElementChild;
+  lastTask.addEventListener('click', (e) => {
+    if (document.querySelector('.taskDetails') != null) {
+      dom.removeTaskDetails();
+    } else {
+      const taskName = e.currentTarget.querySelector('.taskName p').innerText;
+      const task = selectedProject.searchTask(taskName);
+      const date = new Date(task.dueDate);
+      const formattedDate = format(date, 'do MMM, yyyy');
+
+      dom.createTaskDetails(
+        task.getName,
+        task.getDescription,
+        formattedDate,
+        task.priority
+      );
+    }
+  });
+}
+
+// Event when I complete a task and click
+function taskCompleteEvent() {
+  const checkboxList = document.querySelectorAll('.checkbox');
+  const lastCheckbox = checkboxList[checkboxList.length - 1];
+  lastCheckbox.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const taskList = dom.getElem('.taskList');
+    const taskDiv = e.target.parentElement.parentElement.parentElement;
+    const taskName = taskDiv.querySelector('.taskName p').innerText;
+    selectedProject.removeTask(taskName);
+    console.log(taskName);
+    taskList.removeChild(e.target.parentElement.parentElement.parentElement);
   });
 }
 
 // Selected project variable - - Create defaults
-const defaultProject = new Project('default');
+const defaultProject = new Project('Default');
 dom.addProjectToDom(defaultProject.getName);
 selectProjectForm();
 let selectedProject = defaultProject;
-selectedProject.addTask('lida');
-console.log(selectedProject.getTaskList);
+generateTasks();
+const task1 = new Task('loda', 'lassan', '', '');
+
+// dom.createTaskDetails(task1.getName, task1.getDescription);

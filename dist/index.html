@@ -23,117 +23,114 @@
             <h2>PROJECTS</h2>
             <h2 id="addProjectButton">+</h2>
           </div>
-          <div class="projectList">
-            <template id="newProjectTemplate">
-              <form class="newProjectForm">
-                <div class="newProject">
-                  <input
-                    type="text"
-                    id="newProjectName"
-                    placeholder="Enter Project Name"
-                  />
-                  <input type="submit" />
-                </div>
-              </form>
-            </template>
-
-            <div class="project">Example Project</div>
-            <div class="project">Example Project</div>
-          </div>
+          <div class="projectList"></div>
         </div>
         <div class="taskColumn">
-          <template id="newTaskTemplate">
-            <form class="newTaskForm">
-              <div class="newTaskModal">
-                <div class="taskName">
-                  <h2>Name</h2>
-                  <input type="text" id="taskName" />
-                </div>
-                <div class="taskDescription">
-                  <h2>Description</h2>
-                  <textarea id="taskDescription"></textarea>
-                </div>
-                <div class="taskDate">
-                  <h2>Due Date</h2>
-                  <input type="date" id="dueDate" />
-                </div>
-                <div class="taskPriority">
-                  <h2>Priority</h2>
-                  <div class="radio">
-                    <div class="high">
-                      <p>High</p>
-                      <input type="radio" class="taskPriority" value="high" />
-                    </div>
-                    <div class="medium">
-                      <p>Medium</p>
-                      <input type="radio" class="taskPriority" value="medium" />
-                    </div>
-                    <div class="low">
-                      <p>Low</p>
-                      <input type="radio" class="taskPriority" value="low" />
-                    </div>
-                  </div>
-                </div>
-                <div class="submit">
-                  <input type="submit" />
-                </div>
-              </div>
-            </form>
-          </template>
-
           <div class="taskTitle">
             <h2>TASKS</h2>
             <h2 id="addTaskButton">+</h2>
           </div>
           <div class="taskContainer">
-            <template id="taskTemplate">
-              <div class="task">
-                <div class="checkbox">
-                  <div class="pretty p-svg p-plain p-bigger">
-                    <input type="checkbox" />
-                    <div class="state">
-                      <img class="svg" src="./img/checkmark.svg" />
-                      <label></label>
-                    </div>
-                  </div>
-                </div>
-                <p>Example Project</p>
-              </div>
-            </template>
-            <div class="taskList">
-              <div class="task">
-                <div class="checkbox">
-                  <div class="pretty p-svg p-plain p-bigger">
-                    <input type="checkbox" />
-                    <div class="state">
-                      <img class="svg" src="./img/checkmark.svg" />
-                      <label></label>
-                    </div>
-                  </div>
-                </div>
-                <p>Example Project</p>
-              </div>
-              <div class="task">
-                <div class="checkbox">
-                  <div class="pretty p-svg p-plain p-bigger">
-                    <input type="checkbox" />
-                    <div class="state">
-                      <img class="svg" src="./img/checkmark.svg" />
-                      <label></label>
-                    </div>
-                  </div>
-                </div>
-                <p>Example Project</p>
-              </div>
-            </div>
-            <div class="taskDetails">
-              <h2>Example Project</h2>
-              <span>Due Date: 16th Feb</span>
-              <p>these are the details of the task</p>
-            </div>
+            <div class="taskList"></div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="templates">
+      <template id="newProjectTemplate">
+        <form class="newProjectForm">
+          <div class="newProject">
+            <input
+              type="text"
+              id="newProjectName"
+              placeholder="Enter Project Name"
+              required
+            />
+            <input type="submit" />
+          </div>
+        </form>
+      </template>
+
+      <template id="newTaskTemplate">
+        <form class="newTaskForm">
+          <div class="newTaskModal">
+            <div class="taskName">
+              <h2>Name</h2>
+              <input type="text" id="taskName" required />
+            </div>
+            <div class="taskDescription">
+              <h2>Description</h2>
+              <textarea
+                id="taskDescription"
+                placeholder="Enter optional description"
+              ></textarea>
+            </div>
+            <div class="taskDate">
+              <h2>Due Date</h2>
+              <input type="date" id="dueDate" required />
+            </div>
+            <div class="taskPriority">
+              <h2>Priority</h2>
+              <div class="radio">
+                <div class="high">
+                  <p>High</p>
+                  <input type="radio" class="taskPriority" value="high" />
+                </div>
+                <div class="medium">
+                  <p>Medium</p>
+                  <input
+                    type="radio"
+                    class="taskPriority"
+                    value="medium"
+                    checked
+                  />
+                </div>
+                <div class="low">
+                  <p>Low</p>
+                  <input type="radio" class="taskPriority" value="low" />
+                </div>
+              </div>
+            </div>
+            <div class="submit">
+              <input type="submit" />
+            </div>
+          </div>
+        </form>
+      </template>
+
+      <template id="taskTemplate">
+        <div class="task">
+          <div class="checkbox">
+            <div class="pretty p-svg p-plain p-bigger">
+              <input type="checkbox" />
+              <div class="state">
+                <img class="svg" src="./img/checkmark.svg" />
+                <label></label>
+              </div>
+            </div>
+          </div>
+          <div class="taskData">
+            <div class="taskName">
+              <p></p>
+            </div>
+            <div class="taskDate">
+              <span>Date</span>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="taskDetails">
+        <div class="taskDetails">
+          <h2>Example Project</h2>
+          <span>Due Date: 16th Feb</span>
+          <div class="priority">
+            <h4>Priority:&nbsp;</h4>
+            <h4 class="priorityValue"></h4>
+          </div>
+          <p>these are the details of the task</p>
+        </div>
+      </template>
     </div>
   </body>
 </html>

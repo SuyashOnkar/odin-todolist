@@ -23,7 +23,7 @@ textarea {
 }
 
 .selected {
-  border: 1px solid blue;
+  background-color: green;
 }
 
 .todoApp {
@@ -33,12 +33,16 @@ textarea {
 
   display: grid;
   grid-template-columns: 25% 75%;
+  grid-template-rows: 10% 90%;
 
   .projectColumn {
-    border: 1px solid lightblue;
+    border: 1px solid rgb(40, 40, 156);
     height: 100%;
+    grid-row: 1/3;
 
     .projectTitle {
+      grid-row: 1/2;
+      height: 45px;
       justify-content: center;
       padding: 5px;
       border-bottom: 1px solid orange;
@@ -51,6 +55,8 @@ textarea {
     }
 
     .projectList {
+      grid-row: 2/3;
+
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -71,12 +77,17 @@ textarea {
   }
 
   .taskColumn {
+    grid-row: 1/3;
+
     border: 1px solid red;
     height: 100%;
     display: grid;
     grid-template-rows: 10% 90%;
 
     .taskTitle {
+      grid-row: 1/2;
+      height: 45px;
+
       justify-content: center;
       padding: 5px;
       border-bottom: 1px solid orange;
@@ -92,8 +103,8 @@ textarea {
       height: 100%;
       overflow: auto;
       display: grid;
-      grid-template-columns: 2fr 2fr;
-
+      grid-auto-flow: column;
+      grid-template-columns: auto;
       .taskList {
         width: 100%;
         display: flex;
@@ -103,11 +114,25 @@ textarea {
         gap: 5px;
 
         .task {
+          cursor: pointer;
           display: flex;
+          padding: 10px;
+          border-radius: 10px;
           gap: 10px;
+          background-color: rgb(27, 25, 25);
 
           .checkbox {
             width: 25px;
+          }
+          .taskData {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 10px;
+
+            .taskDate {
+              color: red;
+            }
           }
         }
       }
@@ -116,9 +141,19 @@ textarea {
         border: 1px solid greenyellow;
         padding: 5px 15px;
 
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
         text-align: center;
-        span {
-          color: red;
+        .priorityValue {
+          color: blue;
+        }
+
+        .priority {
+          display: flex;
+          justify-content: center;
+          gap: 2px;
         }
       }
     }

@@ -28,9 +28,10 @@ const dom = (() => {
     projectList.append(elem);
   }
 
-  function addTaskToDom(taskName) {
+  function addTaskToDom(taskName, taskDate) {
     const taskTemplate = getElem('#taskTemplate');
     taskTemplate.content.querySelector('p').textContent = taskName;
+    taskTemplate.content.querySelector('span').textContent = taskDate;
     const clone = taskTemplate.content.cloneNode(true);
 
     const taskList = getElem('.taskList');
@@ -39,6 +40,7 @@ const dom = (() => {
 
   function clearTasks() {
     const taskListDom = getElem('.taskList');
+
     taskListDom.replaceChildren('');
   }
 
@@ -77,6 +79,47 @@ const dom = (() => {
     taskContainer.append(clone);
   }
 
+  function createTaskDetails(
+    taskName,
+    taskDescription,
+    taskDate,
+    taskPriority
+  ) {
+    const taskDetailsTemplate = getElem('#taskDetails').content;
+    taskDetailsTemplate.querySelector('h2').innerText = taskName;
+    taskDetailsTemplate.querySelector('p').innerText = taskDescription;
+    taskDetailsTemplate.querySelector('span').innerText = taskDate;
+    taskDetailsTemplate.querySelector('.priorityValue').innerText =
+      taskPriority;
+    if (taskPriority === 'high') {
+      taskDetailsTemplate.querySelector('.priorityValue').style.color = 'red';
+    } else if (taskPriority === 'medium') {
+      taskDetailsTemplate.querySelector('.priorityValue').style.color = 'green';
+    } else if (taskPriority === 'low') {
+      taskDetailsTemplate.querySelector('.priorityValue').style.color =
+        'yellow';
+    } else {
+      taskDetailsTemplate.querySelector('.priorityValue').style.color = 'white';
+    }
+
+    const clone = taskDetailsTemplate.cloneNode(true);
+
+    const taskContainer = getElem('.taskContainer');
+    taskContainer.append(clone);
+  }
+
+  function removeTaskDetails() {
+    const taskContainer = getElem('.taskContainer');
+    taskContainer.removeChild(document.querySelector('.taskDetails'));
+  }
+
+  function removeClass() {
+    const projectList = getElem('.projectList').querySelectorAll('div');
+    projectList.forEach((p) => {
+      p.classList.remove('selected');
+    });
+  }
+
   return {
     addProjectToDom,
     addTaskToDom,
@@ -88,6 +131,9 @@ const dom = (() => {
     removeAddProjectForm,
     removeAddTaskForm,
     clearTasks,
+    createTaskDetails,
+    removeTaskDetails,
+    removeClass,
   };
 })();
 

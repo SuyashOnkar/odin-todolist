@@ -22,4 +22,12 @@ export class Project {
   get getTaskList() {
     return this.taskList;
   }
+
+  searchTask(taskName) {
+    return this.taskList.find((x) => x.getName === taskName);
+  }
+
+  removeTask(taskName) {
+    this.taskList = this.taskList.filter((t) => t.getName !== taskName);
+  }
 }
