@@ -1,136 +1,92 @@
-// Main file
-
-// I have to seperate the application logic from DOM stuff
-
-// 1 file to deal with todos? 1 file to deal with projects?
-// with different functions and all for application logic and dom
 import './reset.css';
 import './style.css';
 
 import { searchProject, Project } from './projects';
 import Task from './tasks';
-import {
-  addProjectToDom,
-  addTaskToDom,
-  createAddProjectForm,
-  createAddTaskForm,
-  createElem,
-  generateTasks,
-  getElem,
-  removeAddProjectForm,
-  removeAddTaskForm,
-} from './domOps';
+import dom from './domOps';
 
-// const task1 = new Task();
+// Event for when I click the add project button
 
-// const project1 = new Project('project1');
-// const project2 = new Project('project2');
+const addProjectButton = dom.getElem('#addProjectButton');
+addProjectButton.addEventListener('click', () => {
+  // Check if already form exists, and remove if it exists
+  // and generate new only if it does not exist.
+  if (dom.getElem('.projectList').querySelector('form')) {
+    dom.removeAddProjectForm();
+  } else {
+    dom.createAddProjectForm();
+    submitProjectForm();
+  }
+});
 
-// project1.addTask(task1);
-
-// addProject('l');
-// addTask('r');
-// createAddProjectForm();
-// createAddTaskForm();
-
-// console.log(projectList);
-
-// console.log(searchProject('project1'));
-
-const submitProjectNameEvent = () => {
-  const addProjectForm = getElem('.newProjectForm');
-  addProjectForm.addEventListener('submit', (e) => {
-    const projectName = getElem('#newProjectName').value;
-    // I need to group these functions together
-    const project = new Project(projectName);
-    project.addToProjectList();
-    addProjectToDom(projectName);
-    // ^^
-    projectSelectEvent();
-    removeAddProjectForm();
+// Event for when I submit Project Name ->
+// create a Project object add Project to dom and List
+// Executes whenever addProjectButton is clicked
+function submitProjectForm() {
+  const newProjectForm = dom.getElem('.newProjectForm');
+  newProjectForm.addEventListener('submit', (e) => {
+    const project = new Project(dom.getElem('#newProjectName').value);
+    dom.addProjectToDom(project.getName);
     e.preventDefault();
+    dom.removeAddProjectForm();
+    selectProjectForm();
   });
-};
+}
 
-const addProjectEvent = () => {
-  const addProjectButton = getElem('#addProjectButton');
-  addProjectButton.addEventListener('click', () => {
-    const projectListDom = getElem('.projectList');
-    if (projectListDom.querySelector('form')) {
-      removeAddProjectForm();
-    } else {
-      createAddProjectForm();
-      /**
-       * Currently running the submit project Event only when
-       * add Project event is called
-       */
-      submitProjectNameEvent();
-    }
+// Add Event Listener to latest (last) project so when we click project ->
+// It makes it the selected project and generates the task list for it.
+// Executes whenever a new project is submitted
+function selectProjectForm() {
+  const latestProject = dom.getElem('.projectList').lastChild;
+  latestProject.addEventListener('click', (e) => {
+    console.log(selectedProject);
+    selectedProject = searchProject(e.target.innerText);
+    console.log(selectedProject);
+    generateTasks();
   });
-};
-// I cant figure a way to run this other than this.
-addProjectEvent();
-// ************************** //
+}
 
-// const submitTaskNameEvent = () => {
-//   const addTaskForm = getElem('.newProjectForm');
-//   addProjectForm.addEventListener('submit', (e) => {
-//     const projectName = getElem('#newProjectName').value;
-//     // I need to group these functions together
-//     const project = new Project(projectName);
-//     project.addToProjectList();
-//     addProjectToDom(projectName);
-//     // ^^
-//     projectSelectEvent();
-//     removeAddProjectForm();
-//     e.preventDefault();
-//   });
-// };
+const addTaskButton = dom.getElem('#addTaskButton');
+addTaskButton.addEventListener('click', () => {
+  if (dom.getElem('.taskContainer').querySelector('form')) {
+    dom.removeAddTaskForm();
+  } else {
+    dom.createAddTaskForm();
+    submitTaskForm();
+  }
+});
 
-const addTaskEvent = () => {
-  const addTaskButton = getElem('#addTaskButton');
-  addTaskButton.addEventListener('click', () => {
-    const taskColumnDom = getElem('.taskColumn');
-    if (taskColumnDom.querySelector('form')) {
-      removeAddTaskForm();
-    } else {
-      createAddTaskForm();
-      /**
-       * Currently running the submit project Event only when
-       * add Project event is called
-       */
-      submitTaskNameEvent();
-    }
+function submitTaskForm() {
+  const newTaskForm = dom.getElem('.newTaskForm');
+  newTaskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = dom.getElem('#taskName').value;
+    const description = dom.getElem('#taskDescription').value;
+    const dueDate = dom.getElem('#dueDate').value;
+    const priority = dom.getElem('.taskPriority').value;
+
+    const task = new Task(title, description, dueDate, priority);
+    selectedProject.addTask(task);
+
+    generateTasks();
+    dom.removeAddTaskForm();
   });
-};
+}
 
-addTaskEvent();
+// Generating Task functions and shit
+function generateTasks() {
+  dom.clearTasks();
+  const taskList = selectedProject.getTaskList;
+  console.log(taskList);
+  taskList.forEach((task) => {
+    dom.addTaskToDom(task.getName);
+  });
+}
 
-/**
- * Time for some messy code I think because:
- *  1. I need to implement a selected project function
- *      so we can select a project and then generate its
- *      todo's appropriately.
- *  2. Then only can i add the task listeners because tasks
- *      are supposed to be added to the SELECTED PROJECT.
- */
-
-//Adding the default project manually
-// (I need to fix this code)
-
-const defaultProject = new Project('Default');
-defaultProject.addToProjectList();
-addProjectToDom(defaultProject.getName);
-
+// Selected project variable - - Create defaults
+const defaultProject = new Project('default');
+dom.addProjectToDom(defaultProject.getName);
+selectProjectForm();
 let selectedProject = defaultProject;
-
-const projectSelectEvent = () => {
-  const project = getElem('.projectList').lastChild;
-  project.addEventListener('click', (e) => {
-    selectedProject = searchProject(e.target.value);
-    generateTasks(selectedProject);
-    project.classList.add('selected');
-  });
-};
-
-projectSelectEvent();
+selectedProject.addTask('lida');
+console.log(selectedProject.getTaskList);

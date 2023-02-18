@@ -13,10 +13,14 @@ textarea {
   transform: translate(-50%, -20%);
 }
 
+.selected {
+  border: 1px solid blue;
+}
+
 .todoApp {
   border: 1px solid black;
   width: 700px;
-  height: 400px;
+  height: 450px;
   display: grid;
   grid-template-columns: 25% 75%;
 }
@@ -116,19 +120,19 @@ textarea {
   text-align: center;
 }
 
-.taskColumn {
+.taskContainer {
   position: relative;
 }
 
 .newTaskModal {
   position: absolute;
   background-color: rgb(19, 16, 16);
-  width: 250px;
-  height: 300px;
+  width: 300px;
+  height: 380px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px;
+  padding: 10px 20px;
   font-size: 1em;
   border-radius: 15px;
   display: flex;
@@ -139,6 +143,29 @@ textarea {
 .newTaskModal textarea {
   background: rgb(49, 42, 42);
   border: 0;
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%;
+}
+.newTaskModal .submit {
+  display: flex;
+  justify-content: center;
+}
+.newTaskModal .submit input[type=submit] {
+  cursor: pointer;
+  padding: 10px;
+}
+.newTaskModal .submit input[type=submit]:hover {
+  background-color: rgb(38, 30, 30);
+}
+.newTaskModal .taskPriority .radio {
+  display: flex;
+  gap: 10px;
+}
+.newTaskModal .taskPriority .radio * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style.css.map */

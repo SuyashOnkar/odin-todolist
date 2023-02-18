@@ -1,23 +1,19 @@
 const projectList = [];
 
 export function searchProject(projectName) {
-  return projectList.filter((x) => x.getName === projectName);
+  return projectList.find((x) => x.getName === projectName);
 }
 
 export class Project {
   constructor(name) {
     this.name = name;
-  }
-
-  addToProjectList() {
+    this.taskList = [];
     projectList.push(this);
   }
 
   get getName() {
     return this.name;
   }
-
-  taskList = [];
 
   addTask(task) {
     this.taskList.push(task);

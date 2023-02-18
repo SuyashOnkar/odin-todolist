@@ -4,69 +4,91 @@
  * the application logic
  */
 
-export function createElem(name, className) {
-  const elem = document.createElement(name);
-  if (className) elem.classList.add(className);
+const dom = (() => {
+  function createElem(name, className) {
+    const elem = document.createElement(name);
+    if (className) elem.classList.add(className);
 
-  return elem;
-}
+    return elem;
+  }
 
-export function getElem(name) {
-  return document.querySelector(name);
-}
+  function getElem(name) {
+    return document.querySelector(name);
+  }
 
-// Should I take input the projectList and generate using
-// [.length-1] to generate the last element or should I
-// directly get the name from the button
+  // Should I take input the projectList and generate using
+  // [.length-1] to generate the last element or should I
+  // directly get the name from the button
 
-export function addProjectToDom(projectName) {
-  const elem = createElem('div', 'project');
-  elem.textContent = projectName;
+  function addProjectToDom(projectName) {
+    const elem = createElem('div', 'project');
+    elem.textContent = projectName;
 
-  const projectList = getElem('.projectList');
-  projectList.append(elem);
-}
+    const projectList = getElem('.projectList');
+    projectList.append(elem);
+  }
 
-export function addTaskToDom(taskName) {
-  const taskTemplate = getElem('#taskTemplate');
-  const clone = taskTemplate.content.cloneNode(true);
-  clone.querySelector('p').textContent = taskName;
+  function addTaskToDom(taskName) {
+    const taskTemplate = getElem('#taskTemplate');
+    taskTemplate.content.querySelector('p').textContent = taskName;
+    const clone = taskTemplate.content.cloneNode(true);
 
-  const taskList = getElem('.taskList');
-  taskList.append(clone);
-}
+    const taskList = getElem('.taskList');
+    taskList.append(clone);
+  }
 
-export function generateTasks(taskList) {
-  const taskListDom = getElem('.taskList');
-  taskListDom.replaceChildren('');
-  taskList.forEach((task) => {
-    addTaskToDom(task);
-  });
-}
+  function clearTasks() {
+    const taskListDom = getElem('.taskList');
+    taskListDom.replaceChildren('');
+  }
 
-export function removeAddProjectForm() {
-  const projectList = getElem('.projectList');
-  projectList.removeChild(document.querySelector('.newProjectForm'));
-}
+  function generateTasks(taskList) {
+    const taskListDom = getElem('.taskList');
+    taskListDom.replaceChildren('');
+    taskList.forEach((task) => {
+      addTaskToDom(task);
+    });
+  }
 
-export function createAddProjectForm() {
-  const newProjectTemplate = document.querySelector('#newProjectTemplate');
-  const clone = newProjectTemplate.content.cloneNode(true);
+  function removeAddProjectForm() {
+    const projectList = getElem('.projectList');
+    projectList.removeChild(document.querySelector('.newProjectForm'));
+  }
 
-  const projectList = getElem('.projectList');
+  function createAddProjectForm() {
+    const newProjectTemplate = document.querySelector('#newProjectTemplate');
+    const clone = newProjectTemplate.content.cloneNode(true);
 
-  projectList.append(clone);
-}
+    const projectList = getElem('.projectList');
 
-export function removeAddTaskForm() {
-  const taskColumn = getElem('.taskColumn');
-  taskColumn.removeChild(document.querySelector('.newTaskForm'));
-}
+    projectList.append(clone);
+  }
 
-export function createAddTaskForm() {
-  const newTaskTemplate = document.querySelector('#newTaskTemplate');
-  const clone = newTaskTemplate.content.cloneNode(true);
+  function removeAddTaskForm() {
+    const taskContainer = getElem('.taskContainer');
+    taskContainer.removeChild(document.querySelector('.newTaskForm'));
+  }
 
-  const taskColumn = getElem('.taskColumn');
-  taskColumn.append(clone);
-}
+  function createAddTaskForm() {
+    const newTaskTemplate = document.querySelector('#newTaskTemplate');
+    const clone = newTaskTemplate.content.cloneNode(true);
+
+    const taskContainer = getElem('.taskContainer');
+    taskContainer.append(clone);
+  }
+
+  return {
+    addProjectToDom,
+    addTaskToDom,
+    createAddProjectForm,
+    createAddTaskForm,
+    createElem,
+    generateTasks,
+    getElem,
+    removeAddProjectForm,
+    removeAddTaskForm,
+    clearTasks,
+  };
+})();
+
+export default dom;

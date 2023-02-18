@@ -55,11 +55,27 @@
                 </div>
                 <div class="taskDate">
                   <h2>Due Date</h2>
-                  <input type="date" id="taskDate" />
+                  <input type="date" id="dueDate" />
                 </div>
                 <div class="taskPriority">
                   <h2>Priority</h2>
-                  <input type="radio" id="taskPriority" value="high" />
+                  <div class="radio">
+                    <div class="high">
+                      <p>High</p>
+                      <input type="radio" class="taskPriority" value="high" />
+                    </div>
+                    <div class="medium">
+                      <p>Medium</p>
+                      <input type="radio" class="taskPriority" value="medium" />
+                    </div>
+                    <div class="low">
+                      <p>Low</p>
+                      <input type="radio" class="taskPriority" value="low" />
+                    </div>
+                  </div>
+                </div>
+                <div class="submit">
+                  <input type="submit" />
                 </div>
               </div>
             </form>
@@ -70,21 +86,21 @@
             <h2 id="addTaskButton">+</h2>
           </div>
           <div class="taskContainer">
-            <div class="taskList">
-              <template id="taskTemplate">
-                <div class="task">
-                  <div class="checkbox">
-                    <div class="pretty p-svg p-plain p-bigger">
-                      <input type="checkbox" />
-                      <div class="state">
-                        <img class="svg" src="./img/checkmark.svg" />
-                        <label></label>
-                      </div>
+            <template id="taskTemplate">
+              <div class="task">
+                <div class="checkbox">
+                  <div class="pretty p-svg p-plain p-bigger">
+                    <input type="checkbox" />
+                    <div class="state">
+                      <img class="svg" src="./img/checkmark.svg" />
+                      <label></label>
                     </div>
                   </div>
-                  <p>Example Project</p>
                 </div>
-              </template>
+                <p>Example Project</p>
+              </div>
+            </template>
+            <div class="taskList">
               <div class="task">
                 <div class="checkbox">
                   <div class="pretty p-svg p-plain p-bigger">
