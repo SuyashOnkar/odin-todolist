@@ -28,6 +28,9 @@ function submitProjectForm() {
   const newProjectForm = dom.getElem('.newProjectForm');
   newProjectForm.addEventListener('submit', (e) => {
     const project = new Project(dom.getElem('#newProjectName').value);
+
+    // window.localStorage.setItem(project.getName, project.getTaskList);
+
     dom.addProjectToDom(project.getName);
     e.preventDefault();
     dom.removeAddProjectForm();
@@ -41,7 +44,6 @@ function submitProjectForm() {
 function selectProjectForm() {
   const latestProject = dom.getElem('.projectList').lastChild;
   latestProject.addEventListener('click', (e) => {
-    console.log(selectedProject);
     selectedProject = searchProject(e.target.innerText);
     generateTasks();
 
@@ -83,6 +85,11 @@ function submitTaskForm() {
     const task = new Task(title, description, dueDate, priority);
     selectedProject.addTask(task);
 
+    // window.localStorage.setItem(
+    //   selectedProject.getName,
+    //   JSON.stringify(selectedProject.getTaskList)
+    // );
+
     generateTasks();
     dom.removeAddTaskForm();
   });
@@ -91,6 +98,7 @@ function submitTaskForm() {
 // Generating Task functions and shit
 function generateTasks() {
   dom.clearTasks();
+  console.log(selectedProject);
   const taskList = selectedProject.getTaskList;
   console.log(taskList);
   taskList.forEach((task) => {
@@ -141,11 +149,44 @@ function taskCompleteEvent() {
 }
 
 // Selected project variable - - Create defaults
+// const defaultProject = new Project('Default');
+// dom.addProjectToDom(defaultProject.getName);
+// selectProjectForm();
+// let selectedProject = defaultProject;
+// generateTasks();
+
 const defaultProject = new Project('Default');
 dom.addProjectToDom(defaultProject.getName);
 selectProjectForm();
 let selectedProject = defaultProject;
 generateTasks();
-const task1 = new Task('loda', 'lassan', '', '');
+
+for (let i = 0; i < localStorage.length - 1; i += 1) {
+  const key = window.localStorage.key(i);
+  console.log(key);
+  const projectObj = JSON.parse(window.localStorage.getItem(key));
+  const project = new Project(key);
+
+  projectObj.forEach((t) => {
+    const task = new Task(t.title, t.description, t.dueDate, t.priority);
+    console.log(task);
+    project.addTask(task);
+  });
+  dom.addProjectToDom(project.getName);
+  selectProjectForm();
+  generateTasks();
+
+  // ;
+  // console.log(task);
+  // console.log(projectObj);
+  // const project = new Project(key);
+  // console.log(project);
+  // console.log(project.getName);
+  // project.getTaskList.forEach((t) => {
+  //   t.getName;
+}
+
+// dom.addProjectToDom(project.getName);
+// selectProjectForm();
 
 // dom.createTaskDetails(task1.getName, task1.getDescription);
