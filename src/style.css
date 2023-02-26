@@ -17,6 +17,11 @@ textarea {
   background-color: green;
 }
 
+.title {
+  display: flex;
+  cursor: pointer;
+}
+
 .todoApp {
   background-color: rgb(10, 10, 10);
   width: 700px;
@@ -63,6 +68,7 @@ textarea {
 .todoApp .taskColumn {
   grid-row: 1/3;
   border: 1px solid red;
+  border-bottom: 1px solid green;
   height: 100%;
   display: grid;
   grid-template-rows: 10% 90%;
